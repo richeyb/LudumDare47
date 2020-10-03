@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://PlayerScript.gd" type="Script" id=1]
+[ext_resource path="res://amongus.fbx" type="PackedScene" id=2]
+
+[sub_resource type="CapsuleShape" id=1]
+
+[node name="Player" type="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0693712, 0.883444, -0.00849533 )
+script = ExtResource( 1 )
+
+[node name="amongus" parent="." instance=ExtResource( 2 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, 0, 0, 0 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0.0349523, 0.568147, 0.374573 )
+layers = 2
+light_energy = 0.09
+light_indirect_energy = 0.0
+shadow_bias = -1.35
+omni_range = 2.1
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.991577, -0.0271591, 0.126643, 0, 0.977769, 0.209687, -0.129522, -0.207921, 0.969532, 0.273, 0.919, 1.70575 )
+
+[node name="Lights" type="Node" parent="."]
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 0.537827, 0, 0, 0, 0.323492, 0, 0, 0, 0.241212, 0, -0.645528, -0.0344183 )
+shape = SubResource( 1 )
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.943686, 0.330844, 0, -0.330844, 0.943686, 0, 0.323459, -0.403949 )
+light_energy = 0.2
+shadow_enabled = true
+spot_range = 10.0
