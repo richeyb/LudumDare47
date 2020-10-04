@@ -38,7 +38,8 @@ signal game_over
 
 enum States {
 	Wandering,
-	Hunting
+	Hunting,
+	Looking
 }
 
 export var hunting_speed_factor : float = 2
@@ -53,29 +54,45 @@ export var hunter_killer_distance : float = 10
 onready var raycast : RayCast = get_node("RayCast") as RayCast
 
 func _physics_process(delta):
-#	if player:
-#		var distance = (player.translation.distance_to(translation))
-#		if distance < hunter_killer_distance:
-#			current_state = States.Hunting
-#
 	if current_state == States.Wandering:
-		rotation.y = lerp_angle(rotation.y, rotate, delta)
-		var direction = Vector3(0, 0, 1).rotated(Vector3(0, 1, 0), rotation.y)
-		var velocity = direction * move_speed * delta
-		move_and_slide_with_snap(velocity, Vector3(0, 1, 0))
+		wander(delta)
 	elif current_state == States.Hunting:
-		# var velocity = (translation - player.translation).normalized() * move_speed * delta
-		var velocity = (player.translation - translation).normalized() * move_speed * delta * hunting_speed_factor
-		look_at(player.translation, Vector3(0, 1, 0))
-		rotate_object_local(Vector3(0, 1, 0), 3.14)
-		move_and_slide_with_snap(velocity, Vector3(0, 1, 0))
-		
-		var distance = (player.translation.distance_to(translation))
-		
-		if !i_can_see_player() && distance > hunter_killer_distance:
-			current_state = States.Wandering
-			_on_Timer_timeout()
-			
+		hunt(delta)
+	elif current_state == States.Looking:
+		if raycast.is_colliding():
+			var see_object = raycast.get_collider()
+			if node_in_group(see_object, "walls"):
+				var distance = translation.distance_to(see_object.translation)
+				if distance > 3:
+					current_state = States.Wandering
+					timer.start(5)
+				else:
+					# keep rotating
+					rotation.y = lerp_angle(rotation.y, 360, delta)
+
+func node_in_group(node : Node, group : String) -> bool:
+	var groups = node.get_groups()
+	return (groups.find(group) != -1)
+
+func wander(delta : float) -> void:
+	rotation.y = lerp_angle(rotation.y, rotate, delta)
+	var direction = Vector3(0, 0, 1).rotated(Vector3(0, 1, 0), rotation.y)
+	var velocity = direction * move_speed * delta
+	move_and_slide_with_snap(velocity, Vector3(0, 1, 0))
+	
+func hunt(delta : float) -> void:
+	# var velocity = (translation - player.translation).normalized() * move_speed * delta
+	var velocity = (player.translation - translation).normalized() * move_speed * delta * hunting_speed_factor
+	look_at(player.translation, Vector3(0, 1, 0))
+	rotate_object_local(Vector3(0, 1, 0), 3.14)
+	move_and_slide_with_snap(velocity, Vector3(0, 1, 0))
+	
+	var distance = (player.translation.distance_to(translation))
+	
+	if !i_can_see_player() && distance > hunter_killer_distance:
+		current_state = States.Wandering
+		_on_Timer_timeout()
+
 func i_can_see_player() -> bool:
 	if raycast.is_colliding():
 		var see_object = raycast.get_collider()
@@ -100,9 +117,11 @@ func _on_Area_body_entered(body : Node):
 		if i_can_see_player():
 			current_state = States.Hunting
 
-func _on_GameOverArea_body_entered(body):
+func _on_GameOverArea_body_entered(body : Node):
 	if body.get_name() == "Player":
 		print("Game Over - You were caught")
 		emit_signal("game_over")
 	else:
-		print("Collided with:", body.get_name())
+
+			print("I hit a wall")
+			current_state = States.Looking
