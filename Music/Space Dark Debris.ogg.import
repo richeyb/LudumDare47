@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Space Dark Debris.ogg-ed6f8ece69d626187a7605faa2944fa5.oggstr"
+
+[deps]
+
+source_file="res://Music/Space Dark Debris.ogg"
+dest_files=[ "res://.import/Space Dark Debris.ogg-ed6f8ece69d626187a7605faa2944fa5.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

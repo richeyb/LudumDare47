@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "KinematicBody",
 "class": "Player",
 "language": "GDScript",
-"path": "res://PlayerScript.gd"
+"path": "res://Scripts/PlayerScript.gd"
 } ]
 _global_script_class_icons={
 "Player": ""
@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="LudumDare47"
-run/main_scene="res://DemoScene.tscn"
+run/main_scene="res://Objects/DemoScene.tscn"
 config/icon="res://icon.png"
 
 [input]
@@ -44,6 +44,11 @@ left={
 right={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+crouch={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":67,"unicode":0,"echo":false,"script":null)
  ]
 }
 
