@@ -20,6 +20,32 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Transform( -5.96046e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -5.96046e-08, 0, -0.0999468, 0 ), Transform( -5.96046e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -5.96046e-08, 0, -0.2, 0 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpotLight:transform")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Transform( 1, 0, 0, 0, 0.943686, 0.330844, 0, -0.330844, 0.943686, 0, -0.0902938, -0.609386 ) ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("FootstepPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": null
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "Normal"
@@ -34,6 +60,32 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Transform( -5.96046e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -5.96046e-08, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpotLight:transform")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Transform( 1, 0, 0, 0, 0.943686, 0.330844, 0, -0.330844, 0.943686, 0, 0.244024, -0.609386 ) ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("FootstepPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": null
+} ],
+"times": PoolRealArray( 0 )
 }
 
 [sub_resource type="Animation" id=2]
@@ -52,13 +104,39 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, 0, 0, 0 ), Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, 0, 0.158, 0 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpotLight:transform")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Transform( 1, 0, 0, 0, 0.943686, 0.330844, 0, -0.330844, 0.943686, 0, 0.541496, -0.609386 ) ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("FootstepPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 3 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [node name="Player" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0693712, 0.883444, -0.00849533 )
 script = ExtResource( 1 )
 
 [node name="PlayerModel" parent="." instance=ExtResource( 2 )]
-transform = Transform( -5.96046e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -5.96046e-08, 0, -0.0999468, 0 )
+transform = Transform( -5.96046e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -5.96046e-08, 0, 0, 0 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="."]
 transform = Transform( 0.537827, 0, 0, 0, 0.718849, 0, 0, 0, 0.241212, 0, -0.253899, -0.0344183 )
@@ -67,15 +145,15 @@ shape = SubResource( 1 )
 [node name="Lights" type="Node" parent="."]
 
 [node name="OmniLight" type="OmniLight" parent="."]
-transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0.0349523, 0.833303, 0.374573 )
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0.0349523, 0.833303, -0.0796458 )
 layers = 2
 light_energy = 0.09
 light_indirect_energy = 0.0
 shadow_bias = -1.35
-omni_range = 2.1
+omni_range = 0.9
 
 [node name="SpotLight" type="SpotLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.943686, 0.330844, 0, -0.330844, 0.943686, 0, 0.27329, -0.472003 )
+transform = Transform( 1, 0, 0, 0, 0.943686, 0.330844, 0, -0.330844, 0.943686, 0, 0.541496, -0.609386 )
 light_energy = 0.2
 shadow_enabled = true
 spot_range = 10.0

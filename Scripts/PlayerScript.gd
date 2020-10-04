@@ -11,8 +11,6 @@ onready var animation_player : AnimationPlayer = get_node("AnimationPlayer") as 
 onready var footstep_player : AudioStreamPlayer3D = get_node("FootstepPlayer") as AudioStreamPlayer3D
 
 func _ready():
-	footstep_player.playing = true
-	footstep_player.stream_paused = true
 	animation_player = get_node("AnimationPlayer")
 
 func _physics_process(delta : float) -> void:
@@ -26,14 +24,11 @@ func _physics_process(delta : float) -> void:
 		
 	if crouching && z_movement == 0:
 		animation_player.play("Crouch")
-		footstep_player.stream_paused = true
 	elif z_movement != 0:
 		animation_player.play("Walk")
-		footstep_player.stream_paused = false
 	else:
 		animation_player.play("Normal")
 		animation_player.stop()
-		footstep_player.stream_paused = true
 	
 	rotation.y +=  rotate * rotate_speed * delta
 	var direction : Vector3 = Vector3(0, 0, 1).rotated(Vector3(0, 1, 0), rotation.y)
