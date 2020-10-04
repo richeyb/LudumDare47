@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Objects/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Objects/computer.tscn" type="PackedScene" id=2]
@@ -10,13 +10,13 @@
 [ext_resource path="res://Models/scanner.fbx" type="PackedScene" id=8]
 [ext_resource path="res://Models/vent.fbx" type="PackedScene" id=9]
 [ext_resource path="res://Objects/fire.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Objects/green-crewmate.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Objects/Impostor.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Objects/dead-crewmate-2.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Music/SFX_fire_LOOP_01.ogg" type="AudioStream" id=13]
 [ext_resource path="res://Objects/cafeteria-table.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Textures/HD-Space-Wallpaper-For-Background-14.jpg" type="Texture" id=15]
 [ext_resource path="res://Objects/dead-crewmate-3.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scripts/Impostor.gd" type="Script" id=17]
+[ext_resource path="res://Objects/GameScript.gd" type="Script" id=17]
 
 [sub_resource type="PanoramaSky" id=1]
 radiance_size = 0
@@ -25,8 +25,9 @@ panorama = ExtResource( 15 )
 [sub_resource type="Environment" id=2]
 background_mode = 2
 background_sky = SubResource( 1 )
-background_sky_custom_fov = 156.2
-background_energy = 0.01
+background_sky_custom_fov = 124.1
+background_energy = 0.15
+ambient_light_energy = 0.0
 fog_color = Color( 0.478431, 0.541176, 0.603922, 1 )
 fog_sun_color = Color( 0.0352941, 0.0156863, 0.0156863, 1 )
 
@@ -45,21 +46,16 @@ albedo_texture = ExtResource( 6 )
 
 [sub_resource type="CylinderShape" id=8]
 
-[sub_resource type="SphereShape" id=9]
-radius = 0.669791
-
-[sub_resource type="Curve3D" id=10]
-_data = {
-"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 1.00826, -1.40369, -0.110899, 0, 0, 0, 0, 0, 0, 7.69842, -1.46312, 1.69564, 0, 0, 0, 0, 0, 0, 13.1564, -1.30612, 1.66956, 0, 0, 0, 0, 0, 0, 16.4804, -1.37951, 1.28806, 0, 0, 0, 0, 0, 0, 21.8506, -1.48457, 1.62198, 0, 0, 0, 0, 0, 0, 26.7782, -1.44095, 2.32638, 0, 0, 0, 0, 0, 0, 32.5081, -1.39803, 2.23451, 0, 0, 0, 0, 0, 0, 38.4079, -1.28763, 1.52451, 0, 0, 0, 0, 0, 0, 46.9677, -0.976241, 2.02932, 0, 0, -1, 0, 0, 1, 49.8262, -1.06897, 6.9356, 0.2, 0.3, -2.1, -0.2, -0.3, 2.1, 53.7155, -1.26247, 7.54716, 0, 0, 0, 0, 0, 0, 57.5638, -1.48457, 24.5714, 0, 0, 0, 0, 0, 0, 1.00826, -1.40369, -0.110899 ),
-"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
-}
-
 [node name="Game" type="Node"]
+script = ExtResource( 17 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
+
+[node name="Impostor" parent="." instance=ExtResource( 11 )]
+transform = Transform( 0.027022, 0, -0.499269, 0, 0.5, 0, 0.499269, 0, 0.027022, 13.7773, 0.9725, -16.1692 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
@@ -70,43 +66,63 @@ autoplay = true
 
 [node name="Walls" type="Node" parent="Level"]
 
-[node name="Wall4" type="CSGBox" parent="Level/Walls"]
+[node name="Wall4" type="CSGBox" parent="Level/Walls" groups=[
+"walls",
+]]
 transform = Transform( 0.537827, 0, 0, 0, 3.05053, 0, 0, 0, 10.9993, -10.3655, 2.68689, 2.6448 )
 use_collision = true
 
-[node name="Wall3" type="CSGBox" parent="Level/Walls"]
+[node name="Wall3" type="CSGBox" parent="Level/Walls" groups=[
+"walls",
+]]
 transform = Transform( 6.9041e-09, 0, 3.23023, 0, 3.05053, 0, 0.537827, 0, -4.80793e-07, -6.66021, 2.66284, 10.2856 )
 use_collision = true
 
-[node name="Wall7" type="CSGBox" parent="Level/Walls"]
+[node name="Wall7" type="CSGBox" parent="Level/Walls" groups=[
+"walls",
+]]
 transform = Transform( -0.537827, 0, 3.39595e-07, 0, 3.05053, 0, -1.82441e-08, 0, 3.54907, 11.5934, 2.66284, 4.03713 )
 use_collision = true
 
-[node name="Wall9" type="CSGBox" parent="Level/Walls"]
+[node name="Wall9" type="CSGBox" parent="Level/Walls" groups=[
+"walls",
+]]
 transform = Transform( -0.537827, 0, 3.39595e-07, 0, 0.314286, 0, -1.66051e-08, 0, 3.23023, 11.5791, 5.35806, -1.22144 )
 use_collision = true
 
-[node name="Wall8" type="CSGBox" parent="Level/Walls"]
+[node name="Wall8" type="CSGBox" parent="Level/Walls" groups=[
+"walls",
+]]
 transform = Transform( -0.537827, 0, 3.39595e-07, 0, 3.05053, 0, -3.89217e-08, 0, 7.57154, 11.5934, 2.66284, -11.8557 )
 use_collision = true
 
-[node name="Wall10" type="CSGBox" parent="Level/Walls"]
+[node name="Wall10" type="CSGBox" parent="Level/Walls" groups=[
+"walls",
+]]
 transform = Transform( -0.537827, 0, 3.39595e-07, 0, 3.05053, 0, -8.58317e-08, 0, 16.6971, 17.0555, 2.66284, -9.13384 )
 use_collision = true
 
-[node name="Wall6" type="CSGBox" parent="Level/Walls"]
+[node name="Wall6" type="CSGBox" parent="Level/Walls" groups=[
+"walls",
+]]
 transform = Transform( 0.312341, 0, 2.62969, 0, 3.05053, 0, 0.437837, 0, -1.87594, -8.73768, 2.66284, -8.87095 )
 use_collision = true
 
-[node name="Wall2" type="CSGBox" parent="Level/Walls"]
+[node name="Wall2" type="CSGBox" parent="Level/Walls" groups=[
+"walls",
+]]
 transform = Transform( -1.88581e-08, 0, -8.82318, 0, 3.05053, 0, 0.537827, 0, -4.80793e-07, 2.91311, 2.77372, -10.6789 )
 use_collision = true
 
-[node name="Wall5" type="CSGBox" parent="Level/Walls"]
+[node name="Wall5" type="CSGBox" parent="Level/Walls" groups=[
+"walls",
+]]
 transform = Transform( 0.307207, 0, -9.02834, 0, 3.05053, 0, 0.441454, 0, 6.28281, -7.54485, 2.66284, 13.1672 )
 use_collision = true
 
-[node name="Wall" type="CSGBox" parent="Level/Walls"]
+[node name="Wall" type="CSGBox" parent="Level/Walls" groups=[
+"walls",
+]]
 transform = Transform( -1.04067e-08, 0, -5.19357, 0, 3.05053, 0, 0.537827, 0, -5.12844e-07, 6.47722, 2.66284, 6.99249 )
 use_collision = true
 
@@ -387,7 +403,7 @@ __meta__ = {
 }
 
 [node name="CSGCylinder2" type="CSGCylinder" parent="Level/Cafeteria/CSGMesh"]
-transform = Transform( 8.29323, 0, -3.49604, 0, 11, 0, 3.49604, 0, 8.29323, 13.5196, 0.527753, 16.8483 )
+transform = Transform( 8.29323, 0, -3.49604, 0, 13.2, 0, 3.49604, 0, 8.29323, 13.5196, 0.527753, 16.8483 )
 operation = 2
 __meta__ = {
 "_editor_description_": "	"
@@ -423,23 +439,10 @@ transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 6.10529, 0.0350745, 26.5184 )
 [node name="dead-crewmate-2" parent="Level/Cafeteria" instance=ExtResource( 16 )]
 transform = Transform( -0.0790268, 0.340404, 0.357603, -0.487047, -0.113071, 0, 0.0808687, -0.348339, 0.349457, 7.53393, 0.552699, 21.2815 )
 
-[node name="Impostor" type="KinematicBody" parent="Level"]
-transform = Transform( 0.027022, 0, -0.499269, 0, 0.5, 0, 0.499269, 0, 0.027022, 13.846, 1, -16.185 )
-script = ExtResource( 17 )
-
-[node name="Model" parent="Level/Impostor" instance=ExtResource( 11 )]
-
-[node name="CollisionShape" type="CollisionShape" parent="Level/Impostor"]
-transform = Transform( 1.49397, 0, 0.00507315, 0, 1.89162, 0, 0.00507308, 0, 1.40051, 0, -0.228271, 0 )
-shape = SubResource( 9 )
-
-[node name="Path" type="Path" parent="Level/Impostor"]
-transform = Transform( 1, 0, -2.23517e-08, 0, 1, 0, 2.23517e-08, 0, 1, 0, 0, 0 )
-curve = SubResource( 10 )
-
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5531, 5.31499, 6.1384 )
 light_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
 light_energy = 0.82
 shadow_enabled = true
 omni_range = 35.3
+[connection signal="game_over" from="Impostor" to="." method="_on_Impostor_game_over"]

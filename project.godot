@@ -9,12 +9,24 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "GameScript",
+"language": "GDScript",
+"path": "res://Objects/GameScript.gd"
+}, {
+"base": "KinematicBody",
+"class": "Impostor",
+"language": "GDScript",
+"path": "res://Scripts/Impostor.gd"
+}, {
 "base": "KinematicBody",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Scripts/PlayerScript.gd"
 } ]
 _global_script_class_icons={
+"GameScript": "",
+"Impostor": "",
 "Player": ""
 }
 
