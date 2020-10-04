@@ -14,14 +14,14 @@ transform = Transform( -0.977615, 0, 0.210404, 0, 1, 0, -0.210404, 0, -0.977615,
 light_color = Color( 0.0724773, 0.0666504, 0.8125, 1 )
 light_energy = 1.45
 light_indirect_energy = 2.75
-omni_range = 0.5
+omni_range = 1.4
 
 [node name="GreenLight" type="OmniLight" parent="." index="2"]
 transform = Transform( -0.977615, 0, 0.210404, 0, 1, 0, -0.210404, 0, -0.977615, 0.0738533, 8.9407e-08, 0.0481479 )
 light_color = Color( 0.109804, 0.290196, 0.145098, 1 )
 light_energy = 4.3
 light_indirect_energy = 2.38
-omni_range = 0.2
+omni_range = 0.0
 
 [node name="StaticBody" type="StaticBody" parent="." index="3"]
 
