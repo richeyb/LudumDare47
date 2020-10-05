@@ -1017,6 +1017,8 @@ __meta__ = {
 
 [node name="FadeToBlack" type="TextureRect" parent="UI"]
 modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_right = 1024.0
 margin_bottom = 600.0
 texture = SubResource( 8 )
