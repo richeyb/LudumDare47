@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/blood-spatter.png-631502b07a02020dd1e03018b1c4d83c.s3tc.stex"
 path.etc2="res://.import/blood-spatter.png-631502b07a02020dd1e03018b1c4d83c.etc2.stex"
+path.etc="res://.import/blood-spatter.png-631502b07a02020dd1e03018b1c4d83c.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Textures/blood-spatter.png"
-dest_files=[ "res://.import/blood-spatter.png-631502b07a02020dd1e03018b1c4d83c.s3tc.stex", "res://.import/blood-spatter.png-631502b07a02020dd1e03018b1c4d83c.etc2.stex" ]
+dest_files=[ "res://.import/blood-spatter.png-631502b07a02020dd1e03018b1c4d83c.s3tc.stex", "res://.import/blood-spatter.png-631502b07a02020dd1e03018b1c4d83c.etc2.stex", "res://.import/blood-spatter.png-631502b07a02020dd1e03018b1c4d83c.etc.stex" ]
 
 [params]
 

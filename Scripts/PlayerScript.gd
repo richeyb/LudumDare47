@@ -18,6 +18,12 @@ var current_state : int = States.Normal
 
 func _ready():
 	animation_player = get_node("AnimationPlayer")
+	
+func pause():
+	current_state = States.Paused
+
+func resume():
+	current_state = States.Normal
 
 func _physics_process(delta : float) -> void:
 	if current_state == States.Paused:
