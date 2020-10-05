@@ -1004,7 +1004,6 @@ __meta__ = {
 }
 
 [node name="LogsDownloaded" type="Label" parent="UI"]
-visible = false
 margin_top = -1.0
 margin_right = 165.0
 margin_bottom = 43.0
@@ -1017,7 +1016,6 @@ __meta__ = {
 }
 
 [node name="FadeToBlack" type="TextureRect" parent="UI"]
-visible = false
 modulate = Color( 1, 1, 1, 0 )
 margin_right = 1024.0
 margin_bottom = 600.0

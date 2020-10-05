@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Music/Time of Triumph (Short).ogg" type="AudioStream" id=1]
+[ext_resource path="res://Objects/victory-screen.gd" type="Script" id=2]
+
+[node name="VictoryScreen" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+modulate = Color( 0, 0, 0, 1 )
+margin_right = 1024.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogPanel" type="Panel" parent="CanvasLayer"]
+margin_left = 32.0
+margin_top = 24.0
+margin_right = 992.0
+margin_bottom = 568.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/DialogPanel"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 944.0
+margin_bottom = 472.0
+
+[node name="DialogCloseButton" type="Button" parent="CanvasLayer/DialogPanel"]
+margin_left = 816.0
+margin_top = 488.0
+margin_right = 928.0
+margin_bottom = 520.0
+text = "Close"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+autoplay = true
+[connection signal="pressed" from="CanvasLayer/DialogPanel/DialogCloseButton" to="." method="_on_DialogCloseButton_pressed"]

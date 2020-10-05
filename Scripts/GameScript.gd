@@ -21,12 +21,16 @@ onready var download_label : Label = get_node("UI/DownloadPanel/DownloadLabel")
 onready var logs_downloaded_display : Label = get_node("UI/LogsDownloaded")
 onready var fade_to_black : TextureRect = get_node("UI/FadeToBlack")
 
-var logs : int = 0
+onready var ui : CanvasLayer = get_node("UI")
+
+var logs : int = 4
 var downloading_from : DeadCrewmate
 var sending_final_transmission : bool = false
 
 var is_fading_in : bool = false
 var is_fading_out : bool = false
+
+var game_won : bool = false
 
 func _ready():
 	initial_player_position = player.translation
@@ -49,7 +53,10 @@ func fade(delta):
 	elif is_fading_out:
 		fade_to_black.modulate.a += 1 * delta
 		if fade_to_black.modulate.a >= 1:
-			reset_game()
+			if game_won:
+				Global.goto_scene("res://Objects/victory-screen.tscn")
+			else:
+				reset_game()
 			is_fading_in = true
 			is_fading_out = false
 
@@ -120,6 +127,9 @@ func win_the_game():
 	print("You win!")
 	download_timer.stop()
 	download_panel.visible = false
+	pause_game()
+	game_won = true
+	is_fading_out = true
 	
 func pause_game():
 	player.pause()
