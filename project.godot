@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://Scripts/PlayerScript.gd"
+}, {
+"base": "Spatial",
+"class": "Vent",
+"language": "GDScript",
+"path": "res://Scripts/VentScript.gd"
 } ]
 _global_script_class_icons={
 "GameScript": "",
 "Impostor": "",
-"Player": ""
+"Player": "",
+"Vent": ""
 }
 
 [application]
