@@ -31,6 +31,7 @@ export var move_speed : float = 100
 
 export var player_path : NodePath
 var player : Player
+export var my_name : String
 
 #onready var wallchecker : StaticBody = get_node("WallChecker") as StaticBody
 
@@ -53,23 +54,27 @@ export var hunter_killer_distance : float = 10
 
 onready var raycast : RayCast = get_node("RayCast") as RayCast
 
+export var gravity_factor : float = -2.0
+export var nudge_toward_player_factor : int = 8
+
 func _physics_process(delta):
 	if current_state == States.Wandering:
 		wander(delta)
 	elif current_state == States.Hunting:
 		hunt(delta)
 	elif current_state == States.Looking:
-		if raycast.is_colliding():
-			var see_object = raycast.get_collider()
-			if node_in_group(see_object, "walls"):
-				var distance = translation.distance_to(see_object.translation)
-				if distance > 3:
-					current_state = States.Wandering
-					timer.start(5)
-				else:
-					# keep rotating
-					rotation.y = lerp_angle(rotation.y, 360, delta)
+		avoid_walls(delta)
 
+func avoid_walls(delta : float) -> void:
+	rotate_object_local(Vector3(0, 1, 0), 3.14 / 10)
+	if raycast.is_colliding():
+		var see_object = raycast.get_collider()
+		if node_in_group(see_object, "walls"):
+			var distance = translation.distance_to(see_object.translation)
+			if distance > 3:
+				current_state = States.Wandering
+				restart_timer()
+	
 func node_in_group(node : Node, group : String) -> bool:
 	var groups = node.get_groups()
 	return (groups.find(group) != -1)
@@ -106,7 +111,19 @@ func i_can_see_player() -> bool:
 		return true
 
 func _on_Timer_timeout():
-	rotate = randf() * 360
+	restart_timer()
+	
+func set_player(the_player : Player) -> void:
+	player = the_player
+	
+func restart_timer():
+	var slot : int = randi() % nudge_toward_player_factor + 1
+	if slot == 1 && player:
+		print("nudged")
+		look_at(player.translation, Vector3(0, 1, 0))
+		rotate_object_local(Vector3(0, 1, 0), 3.14)
+	else:
+		rotate = randf() * 360
 	var new_timer = randi() % 5 + 1
 	timer.start(new_timer)
 
@@ -122,6 +139,5 @@ func _on_GameOverArea_body_entered(body : Node):
 		print("Game Over - You were caught")
 		emit_signal("game_over")
 	else:
-
-			print("I hit a wall")
-			current_state = States.Looking
+		print("I hit a wall")
+		current_state = States.Looking
