@@ -46,6 +46,32 @@ albedo_texture = ExtResource( 6 )
 [node name="Game" type="Node"]
 script = ExtResource( 17 )
 
+[node name="DebugLights" type="Node" parent="."]
+
+[node name="OmniLight" type="OmniLight" parent="DebugLights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.1447, 3.58566, 54.0194 )
+omni_range = 13.7
+
+[node name="OmniLight2" type="OmniLight" parent="DebugLights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.82981, 3.58566, 54.0194 )
+omni_range = 13.7
+
+[node name="OmniLight3" type="OmniLight" parent="DebugLights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.82981, 3.58566, 43.499 )
+omni_range = 13.7
+
+[node name="OmniLight4" type="OmniLight" parent="DebugLights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.82981, 3.58566, 64.0945 )
+omni_range = 13.7
+
+[node name="OmniLight5" type="OmniLight" parent="DebugLights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.1976, 3.58566, 75.1235 )
+omni_range = 13.7
+
+[node name="OmniLight6" type="OmniLight" parent="DebugLights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9864, 5.231, 25.7104 )
+omni_range = 40.3
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
 

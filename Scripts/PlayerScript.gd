@@ -11,10 +11,17 @@ onready var footstep_player : AudioStreamPlayer3D = get_node("FootstepPlayer") a
 
 onready var groundcast : RayCast = get_node("GroundCast") as RayCast
 
+enum States {
+	Normal, Paused
+}
+var current_state : int = States.Normal
+
 func _ready():
 	animation_player = get_node("AnimationPlayer")
 
 func _physics_process(delta : float) -> void:
+	if current_state == States.Paused:
+		return
 	translation.y = groundcast.get_collision_point().y
 	
 	var z_movement : float = Input.get_action_strength("backward") - Input.get_action_strength("forward")
@@ -24,7 +31,7 @@ func _physics_process(delta : float) -> void:
 		crouching = true
 	else:
 		crouching = false
-		
+
 	if crouching && z_movement == 0:
 		animation_player.play("Crouch")
 	elif z_movement != 0:

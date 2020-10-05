@@ -4,6 +4,7 @@ class_name GameScript
 onready var player : Player = get_node("Player")
 onready var impostor : Impostor = get_node("Impostor")
 onready var impostor2 : Impostor = get_node("Impostor2")
+var impostors : Array
 
 var initial_player_position : Vector3
 var initial_impostor_position : Vector3
@@ -20,6 +21,7 @@ func _ready():
 	
 	impostor.set_player(player)
 	impostor2.set_player(player)
+	impostors = [impostor, impostor2]
 	
 	vents = get_tree().get_nodes_in_group("vents")
 	print("Vents found:", vents.size())

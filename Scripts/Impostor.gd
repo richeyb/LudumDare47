@@ -16,7 +16,8 @@ signal game_over
 enum States {
 	Wandering,
 	Hunting,
-	Looking
+	Looking,
+	Paused
 }
 
 export var hunting_speed_factor : float = 1.5
@@ -42,6 +43,12 @@ enum Colors {
 }
 export (Colors) var suit_color
 
+func pause():
+	current_state = States.Paused
+
+func resume():
+	current_state = States.Wandering
+
 func _ready():
 	if suit_color == Colors.Green:
 		white_model.visible = false
@@ -53,7 +60,9 @@ func _ready():
 func _physics_process(delta):
 	translation.y = groundcast.get_collision_point().y
 	
-	if current_state == States.Wandering:
+	if current_state == States.Paused:
+		return
+	elif current_state == States.Wandering:
 		wander(delta)
 	elif current_state == States.Hunting:
 		hunt(delta)
