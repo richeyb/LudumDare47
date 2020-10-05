@@ -19,7 +19,7 @@ enum States {
 	Looking
 }
 
-export var hunting_speed_factor : float = 2
+export var hunting_speed_factor : float = 1.5
 
 var current_state : int = States.Wandering
 
