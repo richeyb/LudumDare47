@@ -1,0 +1,95 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Textures/title-screen.png" type="Texture" id=1]
+[ext_resource path="res://Music/Hidden Fear.ogg" type="AudioStream" id=2]
+[ext_resource path="res://Objects/title-screen.gd" type="Script" id=3]
+
+[node name="TitleScreen" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+margin_right = 1024.0
+margin_bottom = 600.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartButton" type="Button" parent="CanvasLayer/TextureRect"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 728.0
+margin_top = 368.0
+margin_right = 864.0
+margin_bottom = 416.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ControlsButton" type="Button" parent="CanvasLayer/TextureRect"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 728.0
+margin_top = 424.0
+margin_right = 896.0
+margin_bottom = 472.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StoryButton" type="Button" parent="CanvasLayer/TextureRect"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 728.0
+margin_top = 472.0
+margin_right = 872.0
+margin_bottom = 520.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/TextureRect"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 728.0
+margin_top = 528.0
+margin_right = 872.0
+margin_bottom = 568.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogPanel" type="Panel" parent="CanvasLayer"]
+visible = false
+margin_left = 32.0
+margin_top = 24.0
+margin_right = 704.0
+margin_bottom = 568.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/DialogPanel"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 648.0
+margin_bottom = 528.0
+
+[node name="DialogCloseButton" type="Button" parent="CanvasLayer/DialogPanel"]
+margin_left = 528.0
+margin_top = 488.0
+margin_right = 640.0
+margin_bottom = 520.0
+text = "Close"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+autoplay = true
+[connection signal="pressed" from="CanvasLayer/TextureRect/StartButton" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TextureRect/ControlsButton" to="." method="_on_ControlsButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/TextureRect/StoryButton" to="." method="_on_StoryButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/TextureRect/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/DialogPanel/DialogCloseButton" to="." method="_on_DialogCloseButton_pressed"]

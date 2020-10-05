@@ -145,14 +145,13 @@ shape = SubResource( 1 )
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0.0349523, 1.77615, -0.0796458 )
 layers = 2
-light_energy = 0.09
 light_indirect_energy = 0.0
 shadow_bias = -1.35
 omni_range = 0.9
 
 [node name="SpotLight" type="SpotLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.943671, 0.330885, 0, -0.330885, 0.943671, 0, 0.559529, -0.609 )
-light_energy = 0.2
+transform = Transform( 1, 0, 0, 0, 0.968036, 0.250811, 0, -0.250811, 0.968036, 0, 0.997926, -0.609 )
+light_energy = 0.5
 shadow_enabled = true
 spot_range = 10.0
 

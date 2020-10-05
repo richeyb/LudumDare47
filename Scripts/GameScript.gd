@@ -21,7 +21,7 @@ onready var download_label : Label = get_node("UI/DownloadPanel/DownloadLabel")
 onready var logs_downloaded_display : Label = get_node("UI/LogsDownloaded")
 onready var fade_to_black : TextureRect = get_node("UI/FadeToBlack")
 
-var logs : int = 5
+var logs : int = 0
 var downloading_from : DeadCrewmate
 var sending_final_transmission : bool = false
 
@@ -64,6 +64,7 @@ func _on_Impostor2_game_over():
 
 func game_over():
 	pause_game()
+	Global.add_death()
 	is_fading_out = true
 	print("Game over, resetting")
 
@@ -137,7 +138,10 @@ func _on_deadcrewmate_begin_download(sender : DeadCrewmate) -> void:
 	begin_download()
 
 func _on_DownloadTimer_timeout():
-	download_progress.value += 5
+	if sending_final_transmission:
+		download_progress.value += 5
+	else:
+		download_progress.value += 10
 	if download_progress.value == 100:
 		download_completed()
 

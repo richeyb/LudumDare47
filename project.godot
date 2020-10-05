@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/PlayerScript.gd"
 }, {
+"base": "Node2D",
+"class": "TitleScreen",
+"language": "GDScript",
+"path": "res://Objects/title-screen.gd"
+}, {
 "base": "Spatial",
 "class": "Vent",
 "language": "GDScript",
@@ -39,14 +44,19 @@ _global_script_class_icons={
 "GameScript": "",
 "Impostor": "",
 "Player": "",
+"TitleScreen": "",
 "Vent": ""
 }
 
 [application]
 
 config/name="LudumDare47"
-run/main_scene="res://Objects/DemoScene.tscn"
+run/main_scene="res://Objects/title-screen.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://Global.gd"
 
 [input]
 
@@ -78,7 +88,7 @@ crouch={
 
 [rendering]
 
-quality/driver/fallback_to_gles2=true
+quality/driver/driver_name="GLES2"
 quality/intended_usage/framebuffer_allocation=3
 threads/thread_model=2
 quality/filters/anisotropic_filter_level=2
