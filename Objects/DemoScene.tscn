@@ -60,7 +60,7 @@ transform = Transform( 0.027022, 0, -0.499269, 0, 0.5, 0, 0.499269, 0, 0.027022,
 my_name = "impostor1"
 
 [node name="Impostor2" parent="." instance=ExtResource( 11 )]
-transform = Transform( -0.499313, 0, 0.0262028, 0, 0.5, 0, -0.0262028, 0, -0.499313, 2.51917, 0.119115, 25.8132 )
+transform = Transform( -0.499313, 0, 0.0262028, 0, 0.5, 0, -0.0262028, 0, -0.499313, 14.796, 0.175386, 23.5358 )
 my_name = "impostor1"
 suit_color = 1
 

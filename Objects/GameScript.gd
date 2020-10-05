@@ -47,7 +47,6 @@ func vent_teleport(imp, came_from):
 	print(vent_cooldown.time_left)
 	if vent_cooldown.time_left > 0:
 		return
-	print("Received vent")
 	var cull_vent = vents.find(came_from)
 	var culled_vents = vents.duplicate()
 	culled_vents.remove(cull_vent)
