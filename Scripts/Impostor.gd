@@ -1,33 +1,9 @@
 extends KinematicBody
 class_name Impostor
 
-#var move_speed = 5
-#var patrol_path
-#var patrol_points
-#var patrol_index = 0
-#
-#func _ready():
-#	patrol_path = get_node("Path") as Path
-#	if patrol_path:
-#		patrol_points = patrol_path.curve.get_baked_points()
-#
-#func _physics_process(delta):
-#	if !patrol_path || patrol_points.size() <= 0:
-#		return
-#	var position = translation
-#
-#	var target = patrol_points[patrol_index]
-#	if position.distance_to(target) < 1:
-#		print("at target")
-#		patrol_index = wrapi(patrol_index + 1, 0, patrol_points.size())
-#		target = patrol_points[patrol_index]
-#	var velocity = (target - position).normalized() * move_speed
-#	velocity = move_and_slide(velocity)
-#	transform.origin.y = 1.0
-
 onready var timer : Timer = get_node("Timer")
 
-export var move_speed : float = 100
+export var move_speed : float = 200
 
 export var player_path : NodePath
 var player : Player
@@ -53,11 +29,30 @@ var rotate_speed : float = 1.0
 export var hunter_killer_distance : float = 10
 
 onready var raycast : RayCast = get_node("RayCast") as RayCast
+onready var groundcast  : RayCast = get_node("GroundCast") as RayCast
+
+onready var green_model : Spatial = get_node("GreenModel") as Spatial
+onready var white_model : Spatial = get_node("WhiteModel") as Spatial
 
 export var gravity_factor : float = -2.0
 export var nudge_toward_player_factor : int = 8
 
+enum Colors {
+	Green, White
+}
+export (Colors) var suit_color
+
+func _ready():
+	if suit_color == Colors.Green:
+		white_model.visible = false
+		green_model.visible = true
+	else:
+		green_model.visible = false
+		white_model.visible = true
+
 func _physics_process(delta):
+	translation.y = groundcast.get_collision_point().y
+	
 	if current_state == States.Wandering:
 		wander(delta)
 	elif current_state == States.Hunting:
@@ -71,7 +66,7 @@ func avoid_walls(delta : float) -> void:
 		var see_object = raycast.get_collider()
 		if node_in_group(see_object, "walls"):
 			var distance = translation.distance_to(see_object.translation)
-			if distance > 3:
+			if distance > 5:
 				current_state = States.Wandering
 				restart_timer()
 	
@@ -138,6 +133,6 @@ func _on_GameOverArea_body_entered(body : Node):
 	if body.get_name() == "Player":
 		print("Game Over - You were caught")
 		emit_signal("game_over")
-	else:
+	elif node_in_group(body, "walls"):
 		print("I hit a wall")
 		current_state = States.Looking
