@@ -23,7 +23,7 @@ onready var fade_to_black : TextureRect = get_node("UI/FadeToBlack")
 
 onready var ui : CanvasLayer = get_node("UI")
 
-var logs : int = 4
+var logs : int = 0
 var downloading_from : DeadCrewmate
 var sending_final_transmission : bool = false
 
@@ -33,6 +33,12 @@ var is_fading_out : bool = false
 var game_won : bool = false
 
 func _ready():
+	logs = 0
+	game_won = false
+	sending_final_transmission = false
+	is_fading_in = false
+	is_fading_out = false
+	
 	initial_player_position = player.translation
 	initial_impostor_position = impostor.translation
 	initial_impostor2_position = impostor2.translation
